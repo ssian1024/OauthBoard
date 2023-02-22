@@ -12,13 +12,13 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 public class PostsSaveRequestDto {
 
-    @NotBlank(message = "제목은 비워두지 말아주세요. ")
-    @Size(min = 2, max = 20, message = "최대 20글자 까지 가능합니다.")
+    @NotBlank(message = "제목을 비우지 말아주세요.")
+    @Size(max = 20, message = "최대 20글자 까지 가능합니다.")
     private String title;
-    @NotBlank(message = "내용은 비워두지 말아주세요. ")
-    @Size(min = 2, max = 300, message = "최대 300글자 까지 가능합니다.")
+    @NotBlank(message = "내용을 비우지 말아주세요.")
+    @Size(max = 300, message = "최대 300글자 까지 가능합니다.")
     private String content;
-    @NotBlank(message = "작성자은 비워두지 말아주세요. ")
+    @NotBlank(message = "작성자를 비우지 말아주세요.")
     private String author;
     @Builder
     public PostsSaveRequestDto(String title, String content, String author){

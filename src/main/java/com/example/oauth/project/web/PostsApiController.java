@@ -5,7 +5,10 @@ import com.example.oauth.project.web.dto.PostsResponseDto;
 import com.example.oauth.project.web.dto.PostsSaveRequestDto;
 import com.example.oauth.project.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -14,8 +17,7 @@ public class PostsApiController {
     private final PostsService postsService;
 
     @PostMapping("/api/v1/posts")
-    public Long save(@RequestBody PostsSaveRequestDto requestDto) {
-
+    public Long save(@RequestBody PostsSaveRequestDto requestDto)  {
         return postsService.save(requestDto);
     }
 
