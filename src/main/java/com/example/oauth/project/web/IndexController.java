@@ -2,10 +2,14 @@ package com.example.oauth.project.web;
 
 import com.example.oauth.project.config.auth.LoginUser;
 import com.example.oauth.project.config.auth.dto.SessionUser;
+import com.example.oauth.project.domain.posts.Posts;
 import com.example.oauth.project.service.posts.PostsService;
 import com.example.oauth.project.web.dto.PostsResponseDto;
 import com.example.oauth.project.web.dto.PostsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +17,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
@@ -24,16 +29,24 @@ import java.util.Map;
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model, @LoginUser SessionUser user) {
-        model.addAttribute("posts", postsService.findAllDesc());
+    public String index(Model model, @PageableDefault(size = 3) Pageable pageable) {
+        Page<Posts> list = postsService.findAllDesc(pageable);
 
+        model.addAttribute("posts", list);
+        model.addAttribute("prev", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("hasNext", list.hasNext());
+        model.addAttribute("hasPrev", list.hasPrevious());
+
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
 
-        return "index";
+        return "index"; // 머스태치 스타터가 앞의 경로 src/main/resources/templates로, 뒤의 확장자 .mustache 로 자동 지정
     }
 
     @GetMapping("/posts/save")

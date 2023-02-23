@@ -7,6 +7,8 @@ import com.example.oauth.project.web.dto.PostsResponseDto;
 import com.example.oauth.project.web.dto.PostsSaveRequestDto;
 import com.example.oauth.project.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Errors;
@@ -37,12 +39,10 @@ public class PostsService {
         return id;
     }
 
-    @Transactional(readOnly = true)
-    public List<PostsListResponseDto> findAllDesc() {
-        return postsRepository.findAllDesc().stream()
-                .map(PostsListResponseDto::new)
-                .collect(Collectors.toList());
-    }
+ @Transactional(readOnly = true)
+    public Page<Posts> findAllDesc(Pageable pageable){
+        return postsRepository.findAllDesc(pageable);
+ }
 
 
     @Transactional

@@ -47,6 +47,11 @@ var index = {
                 $('#' + index + "ValidMessage").html(item);
             })
         }
+        $('#cancelButton').on("click", function () {
+            if (confirm("사용자 목록 페이지로 이동하시겠습니까?" + '\n' + "이동 시 입력 내용은 저장되지 않습니다.")) {
+                window.location.href = '/users/list';
+            }
+        })
 
 
         $('#btn-update').on('click', function () {
