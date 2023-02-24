@@ -1,12 +1,14 @@
 package com.example.oauth.project.domain.user;
 
 import com.example.oauth.project.domain.BaseTimeEntity;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import javax.persistence.Id;
 
 import javax.persistence.*;
+
 
 @Getter
 @NoArgsConstructor

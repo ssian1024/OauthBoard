@@ -2,7 +2,6 @@ package com.example.oauth.project.service.posts;
 
 import com.example.oauth.project.domain.posts.Posts;
 import com.example.oauth.project.domain.posts.PostsRepository;
-import com.example.oauth.project.web.dto.PostsListResponseDto;
 import com.example.oauth.project.web.dto.PostsResponseDto;
 import com.example.oauth.project.web.dto.PostsSaveRequestDto;
 import com.example.oauth.project.web.dto.PostsUpdateRequestDto;
@@ -11,19 +10,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class PostsService {
 
     private final PostsRepository postsRepository;
+
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
@@ -58,5 +51,9 @@ public class PostsService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다 id=" + id));
 
         return new PostsResponseDto(entity);
+    }
+    @Transactional
+    public int updateView(Long id) {
+      return postsRepository.updateView(id);
     }
 }

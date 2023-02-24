@@ -32,7 +32,7 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model, @PageableDefault(size = 3) Pageable pageable) {
+    public String index(Model model, @PageableDefault(size = 9) Pageable pageable) {
         Page<Posts> list = postsService.findAllDesc(pageable);
 
         model.addAttribute("posts", list);
@@ -87,6 +87,7 @@ public class IndexController {
     @GetMapping("/posts/update/{id}")
     public String postsUpdate(@PathVariable Long id, Model model){
         PostsResponseDto dto = postsService.findById(id);
+        postsService.updateView(id); // view 단 추가
         model.addAttribute("post",dto);
 
         return "posts-update";
