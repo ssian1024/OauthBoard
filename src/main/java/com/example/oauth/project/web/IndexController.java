@@ -1,6 +1,5 @@
 package com.example.oauth.project.web;
 
-import com.example.oauth.project.config.auth.LoginUser;
 import com.example.oauth.project.config.auth.dto.SessionUser;
 import com.example.oauth.project.domain.posts.Posts;
 import com.example.oauth.project.service.posts.PostsService;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -32,7 +30,7 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model, @PageableDefault(size = 3) Pageable pageable) {
+    public String index(Model model, @PageableDefault(size = 9) Pageable pageable) {
         Page<Posts> list = postsService.findAllDesc(pageable);
 
         model.addAttribute("posts", list);

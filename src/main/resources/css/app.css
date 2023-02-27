@@ -1,0 +1,28 @@
+/* footer 하단 고정 [S] */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#body-wrapper {
+    min-height: 100%;
+    position: relative;
+}
+
+#body-content {
+    margin-top: 100px;
+    padding-bottom: 99999px; /* footer의 높이 */
+}
+
+footer {
+    width: 100%;
+    height: 90px; /* footer의 높이 */
+    position: absolute;
+    bottom: 0;
+    border-top: 1px solid #c4c4c4;
+    padding-top: 15px;
+    color:#808080;
+    font-size:11px
+}
+/* footer 하단 고정 [E] */

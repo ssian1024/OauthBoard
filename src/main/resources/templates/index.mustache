@@ -3,49 +3,46 @@
 <h3>Board 기능 (수정 중) </h3>
 <br>
 <div class="col-md-12">
-<div class="row">
-<div class="col-md-6">
-        {{^userName}}
-        <a href="/login" role="button" class="btn btn-primary">로그인</a>
+    <div class="row">
+        <div class="col-md-6">
+            {{^userName}}
+                <a href="/login" role="button" class="btn btn-primary bi bi-box-arrow-in-right"> 소셜 로그인</a>
             {{/userName}}
-        {{#userName}}
-                Logged in as: <span id="user">{{userName}}</span>
-                <a href="/posts/save" role="button" class="btn btn-primary"> 글 작성 </a>
-                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
-        {{/userName}}
+            {{#userName}}
+                <span class="mx-3">{{userName}}님 안녕하세요!</span>
+                <a href="/logout" class="btn btn-outline-dark bi bi-box-arrow-left">로그아웃</a>
+            {{/userName}}
         </div>
-        </div>
-            <br>
-            <!-- 목록 출력 영역 -->
-            <table class="table table-horizontal table-bordered">
-                <thead class="thead-strong">
-                <tr>
-                    <th>게시글번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>최종수정일</th>
-                </tr>
-                </thead>
-                <tbody id="tbody">
-                {{#posts}}
-                    <tr>
-                        <td>{{id}}</td>
-                        <td><a href="/posts/update/{{id}}">{{title}}</a></td>
-                        <td>{{author}}</td>
-                        <td>{{modifiedDate}}</td>
-                    </tr>
-                {{/posts}}
-                </tbody>
-            </table>
-    <ul class="pagination justify-content-center">
-        {{#hasPrev}}
-            <a class="page-link" href="?page={{prev}}">Previous</a>
-        {{/hasPrev}}
-        {{#hasNext}}
-            <a class="page-link" href="?page={{ next }}">Next</a>
-        {{/hasNext}}
-    </ul>
-
-        </div>
-
-        {{>layout/footer}}
+    </div>
+    <br>
+    <!-- 목록 출력 영역 -->
+    <div id="posts_list">
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th>게시글번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>최종수정일</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#posts}}
+            <tr>
+                <td>{{id}}</td>
+                <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+                <td>{{author}}</td>
+                <td>{{modifiedDate}}</td>
+            </tr>
+        {{/posts}}
+        </tbody>
+    </table>
+    <div class="text-right">
+        <a href="/posts/save" role="button" class="btn btn-outline-info bi bi-pencil-fill"> 글쓰기</a>
+    </div>
+    {{! Page }}
+    {{>posts-page}}
+<br>
+</div>
+</div>
+{{>layout/footer}}

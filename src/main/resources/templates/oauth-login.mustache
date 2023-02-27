@@ -1,4 +1,4 @@
-{{>layout/header}}
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,10 +16,8 @@
     <p> 외부 로그인 계정을 선택해주세요. </p>
     <table class = "table table-stripe" th:each = "url: ${urls}">
         <tr>
-            <td><a href="/oauth2/authorization/google"class="btn btn-info active"role="button">
-                <img src="images/google_login_button.png" alt="" onclick="clickBtn();" /></a></td>
-            <td><a href="/oauth2/authorization/naver"class="btn btn-warning active"role="button">
-                <img src="images/kakao_login_button.png" alt="" onclick="clickBtn();" /></a></td>
+            <td><a href="/oauth2/authorization/google" role="button" class="btn btn-outline-danger bi bi-google"> 구글 로그인</a>
+            <td><a href="/oauth2/authorization/kakao" role="button" class="btn btn-outline-success bi bi-arrow-up-right-circle-fill"> 카카오 로그인</a></td>
         </tr>
     </table>
 </div>
