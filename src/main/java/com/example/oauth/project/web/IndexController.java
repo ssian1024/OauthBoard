@@ -85,6 +85,7 @@ public class IndexController {
     @GetMapping("/posts/update/{id}")
     public String postsUpdate(@PathVariable Long id, Model model){
         PostsResponseDto dto = postsService.findById(id);
+        postsService.updateView(id); // view 단 추가
         model.addAttribute("post",dto);
 
         return "posts-update";

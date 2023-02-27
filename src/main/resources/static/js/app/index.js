@@ -4,19 +4,21 @@ var index = {
         var _this = this;
         $('#btn-save').on('click', function () {
             _this.save();
-            if(confirm("등록하시겠습니까?")){
+            if (confirm("등록하시겠습니까?")) {
                 let userFormData = data();
                 setUsers(userFormData);
             }
         })
+
         //JSON 정보 가져옴
-        function data(){
+        function data() {
             return {
                 title: $('#title').val(),
                 author: $('#author').val(),
                 content: $('#content').val()
             }
         }
+
         function setUsers(data) {
             $.ajax({
                 type: 'POST',
@@ -46,13 +48,8 @@ var index = {
             $.each(validationMessage, function (index, item) {
                 $('#' + index + "ValidMessage").html(item);
             })
-        }
-        $('#cancelButton').on("click", function () {
-            if (confirm("사용자 목록 페이지로 이동하시겠습니까?" + '\n' + "이동 시 입력 내용은 저장되지 않습니다.")) {
-                window.location.href = '/users/list';
-            }
-        })
 
+        }
 
         $('#btn-update').on('click', function () {
             _this.update();
@@ -61,15 +58,24 @@ var index = {
         $('#btn-delete').on('click', function () {
             _this.delete();
         });
+
+        $('#cancelButton').on("click", function () {
+            if (confirm("사용자 목록 페이지로 이동하시겠습니까?" + '\n' + "이동 시 입력 내용은 저장되지 않습니다.")) {
+                window.location.href = '/';
+            }
+        })
     },
 
     update: function () {
         var data = {
             title: $('#title').val(),
-            content: $('#content').val()
+            content: $('#content').val(),
+
         };
 
-        var id = $('#id').val();
+        var id = {
+            id: $('#id').val(),
+        }
 
         $.ajax({
             type: 'PUT',
@@ -84,6 +90,8 @@ var index = {
             alert(JSON.stringify(error));
         });
     },
+
+
     delete: function () {
         var id = $('#id').val();
 
