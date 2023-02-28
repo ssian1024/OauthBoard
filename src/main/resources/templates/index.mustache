@@ -1,15 +1,16 @@
 {{>layout/header}}
 
-<h3>Board 기능 (수정 중) </h3>
+
+<main>
 <br>
-<div class="col-md-12">
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-6">
             {{^userName}}
                 <a href="/login" role="button" class="btn btn-primary bi bi-box-arrow-in-right"> 소셜 로그인</a>
             {{/userName}}
             {{#userName}}
-                <span class="mx-3">{{userName}}님 안녕하세요!</span>
+                <span class="mx-3"><i><strong>"{{userName}}"</strong></i> 안녕하세요! </span>
                 <a href="/logout" class="btn btn-outline-dark bi bi-box-arrow-left">로그아웃</a>
             {{/userName}}
         </div>
@@ -45,4 +46,6 @@
 <br>
 </div>
 </div>
+</main>
+<br>
 {{>layout/footer}}

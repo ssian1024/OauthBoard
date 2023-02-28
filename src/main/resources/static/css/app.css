@@ -5,14 +5,18 @@ html, body {
     height: 100%;
 }
 
-#body-wrapper {
-    min-height: 100%;
-    position: relative;
+body{
+    display: flex;
+    flex-direction: column;
+
+    text-align: center;
+    background-color: #999;
+    margin: 0;
 }
 
-#body-content {
-    margin-top: 100px;
-    padding-bottom: 99999px; /* footer의 높이 */
+main {
+    margin-top:50px;
+    margin-left: 250px;
 }
 
 footer {

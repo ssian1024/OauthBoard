@@ -70,9 +70,7 @@ var index = {
         var data = {
             title: $('#title').val(),
             content: $('#content').val(),
-
         };
-
         var id = {
             id: $('#id').val(),
         }

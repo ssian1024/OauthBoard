@@ -1,0 +1,56 @@
+{{>layout/header}}
+
+
+<main>
+    <br>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                {{^userName}}
+                    <a href="/login" role="button" class="btn btn-primary bi bi-box-arrow-in-right"> 소셜 로그인</a>
+                {{/userName}}
+                {{#userName}}
+                    <span class="mx-3"><i><strong>"{{userName}}"</strong></i> 안녕하세요! </span>
+                    <a href="/logout" class="btn btn-outline-dark bi bi-box-arrow-left">로그아웃</a>
+                {{/userName}}
+            </div>
+        </div>
+        <br>
+        <!-- 목록 출력 영역 -->
+        <div id="posts_list">
+            <table class="table table-horizontal table-bordered">
+                <thead class="thead-strong">
+                <tr>
+                    <th>게시글번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>최종수정일</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+                {{#searchList}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+                        <td>{{author}}</td>
+                        <td>{{modifiedDate}}</td>
+                    </tr>
+                {{/searchList}}
+                </tbody>
+            </table>
+            <div class="text-right">
+                <a href="/posts/save" role="button" class="btn btn-outline-info bi bi-pencil-fill"> 글쓰기</a>
+            </div>
+            <div class="pagination justify-content-center">
+                {{#hasPrev}}
+                    <a class="page-link" href="/posts/search?keyword={{keyword}}&page={{prev}}">Previous</a>
+                {{/hasPrev}}
+                {{#hasNext}}
+                    <a class="page-link" href="/posts/search?keyword={{keyword}}&page={{next}}">Next</a>
+                {{/hasNext}}
+            <br>
+        </div>
+    </div>
+</main>
+<br>
+{{>layout/footer}}

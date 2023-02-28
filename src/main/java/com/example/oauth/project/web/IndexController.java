@@ -2,12 +2,14 @@ package com.example.oauth.project.web;
 
 import com.example.oauth.project.config.auth.dto.SessionUser;
 import com.example.oauth.project.domain.posts.Posts;
+import com.example.oauth.project.domain.posts.PostsRepository;
 import com.example.oauth.project.service.posts.PostsService;
 import com.example.oauth.project.web.dto.PostsResponseDto;
 import com.example.oauth.project.web.dto.PostsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -80,14 +82,23 @@ public class IndexController {
         }
         return createResult;
     }
-
-
     @GetMapping("/posts/update/{id}")
     public String postsUpdate(@PathVariable Long id, Model model){
         PostsResponseDto dto = postsService.findById(id);
-        postsService.updateView(id); // view 단 추가
         model.addAttribute("post",dto);
 
         return "posts-update";
+    }
+    @GetMapping("/posts/search")
+    public String search(String keyword, Model model, @PageableDefault(sort ="id", direction = Sort.Direction.DESC) Pageable pageable) {
+        Page<Posts> searchList = postsService.search(keyword,pageable);
+
+        model.addAttribute("keyword",keyword);
+        model.addAttribute("prev",pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next",pageable.next().getPageNumber());
+        model.addAttribute("hasNext",searchList.hasNext());
+        model.addAttribute("hasPrev",searchList.hasPrevious());
+        model.addAttribute("searchList", searchList);
+        return "posts-search";
     }
 }
